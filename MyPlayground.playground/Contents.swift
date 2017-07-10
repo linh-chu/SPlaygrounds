@@ -40,5 +40,16 @@ if UIDevice.current.orientation == UIDeviceOrientation.landscapeLeft || UIDevice
     // It'
 }
 
+/**********************************/
+
+let response = [1200000000009900909, 13, 15, 12, 20]
+var sum: Int = 0
+for res in response {
+    sum = sum + Int(res)
+}
+
+print(sum)
+
+
 
 
