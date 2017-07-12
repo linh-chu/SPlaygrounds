@@ -5,47 +5,16 @@ import Foundation
 import SpriteKit
 
 
-class person: NSObject, NSCoding {
-    
-    var name : String
-    var age : Int
-    
-    init(name: String, age: Int) {
-        self.name = name
-        self.age = age
-        
-    }
-    
-    required init (coder aDecoder: NSCoder) {
-        name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
-        age = aDecoder.decodeInteger(forKey: "age")
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: "name")
-        aCoder.encode(age, forKey: "age")
-    }
-    
-    let saveddata = UserDefaults.standard.object(forKey: "myPeople") as? Data
-    if saveddata != nil{
-        array = (NSKeyedUnarchiver.unarchiveObject(with: saveddata!) as? [person])!
-    }
-    
-    if let savedData = UserDefaults.standard.data(forKey: "people") {
-        array = NSKeyedUnarchiver.unarchiveObject(with: savedData) as? [person]
-    }
-    
-//    static func save() {
-//        let SavedData = NSKeyedArchiver.archivedData(withRootObject: array)
-//        let defaults = UserDefaults.standard
-//        defaults.set(SavedData, forKey: "myPeople")
-//    }
+
+
+private class SomeClass {
+    public init(foo: String) {}
+    public required init(bar: Bool) {}
 }
 
-var person1 = person(name: "Bob", age: 22)
-var person2 = person(name: "John", age: 10)
-var array = [person1, person2]
-print(person1.name)
+private let one = SomeClass(foo: "a")
+private let two = SomeClass(bar: true)
+
 
 
 /***************************/
