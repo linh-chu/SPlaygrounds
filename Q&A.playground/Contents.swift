@@ -5,15 +5,20 @@ import Foundation
 import SpriteKit
 
 
+var listForShort: [Int] = [4, 65, 343, 22, 5445, 343]
 
+let sorted = listForShort.sorted(by: { (s1, s2) in s1 < s2 })
 
-private class SomeClass {
-    public init(foo: String) {}
-    public required init(bar: Bool) {}
+for sort in sorted {
+    print(sort)
 }
 
-private let one = SomeClass(foo: "a")
-private let two = SomeClass(bar: true)
+
+//func enumValues<S: Sequence>(from sequence: S) -> [S.Iterator.Element.RawValue]
+//    where S.Iterator.Element: RawRepresentable {
+//        
+//        return sequence.map { $0.rawValue }
+//}
 
 
 
