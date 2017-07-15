@@ -25,7 +25,7 @@ protocol Heap {
 //    associatedtype Item: Heap
 //    
 //    //FIXME: doesn't allow me to do that. Why?
-////    var heap: Heap<Item> { get set }
+//    var heap<T: Head> where T = Head.T  { get set }
 //    
 //    // doesn't compile as well
 //    // var heap: Heap { get set }
