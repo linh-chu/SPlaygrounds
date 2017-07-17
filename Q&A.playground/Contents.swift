@@ -2,24 +2,35 @@
 
 import UIKit
 import Foundation
-import SpriteKit
+import PlaygroundSupport
+
+URLCache.shared = URLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil)
+
+let container = UIView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
+container.backgroundColor = .red
+//    let view = WKWebView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
+
+//    view.loadHTMLString(htmlString, baseURL: nil)
+//    container.addSubview(view)
+PlaygroundPage.current.liveView = container
+PlaygroundPage.current.needsIndefiniteExecution = true
 
 
-public protocol PriorityQueuable: Hashable {
-    associatedtype KeyType: Comparable
-    associatedtype ValueType: Comparable
-    
-    var key: KeyType { get set }
-    var value: ValueType { get set }
-}
-
-protocol Heap {
-    associatedtype T: Comparable
-    
-    var data: [T] { get set }
-    
-    mutating func heapify(parentIndex: Int)
-}
+//public protocol PriorityQueuable: Hashable {
+//    associatedtype KeyType: Comparable
+//    associatedtype ValueType: Comparable
+//    
+//    var key: KeyType { get set }
+//    var value: ValueType { get set }
+//}
+//
+//protocol Heap {
+//    associatedtype T: Comparable
+//    
+//    var data: [T] { get set }
+//    
+//    mutating func heapify(parentIndex: Int)
+//}
 
 //protocol PriorityQueue<T> {
 //    associatedtype Item: Heap
@@ -31,19 +42,19 @@ protocol Heap {
 //    // var heap: Heap { get set }
 //}
 
-
-struct MyClass: Heap {
-    typealias T = Int
-    
-    var data: [T] = []
-    mutating func heapify(parentIndex: Int) {
-        data.append(parentIndex)
-        print(data)
-    }
-}
-
-var a = MyClass()
-a.heapify(parentIndex: 12)
+//
+//struct MyClass: Heap {
+//    typealias T = Int
+//    
+//    var data: [T] = []
+//    mutating func heapify(parentIndex: Int) {
+//        data.append(parentIndex)
+//        print(data)
+//    }
+//}
+//
+//var a = MyClass()
+//a.heapify(parentIndex: 12)
 
 
 
