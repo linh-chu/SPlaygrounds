@@ -1,4 +1,7 @@
-import Foundation
+/*
+ an operator marked assignment gets folded into an optional chain, allowing foo?.bar += 2 to work as foo?(.bar += 2) instead of failing to type-check as (foo?.bar) += 2. This behavior will be passed to assignment: true on precedence groups from SE-0077. 
+ https://lists.swift.org/pipermail/swift-evolution-announce/2016-June/000191.html
+ */
 
 precedencegroup AssignmentTrue {
     assignment: true
@@ -8,7 +11,7 @@ precedencegroup AssignmentFalse {
     assignment: false
 }
 
-infix operator ++=: AssignmentPrecedence
+infix operator ++=: AssignmentFalse
 infix operator ++: AssignmentFalse
 
 
@@ -27,7 +30,7 @@ extension Int {
 struct AssignmentTesting { var number = 0 }
 
 var assignmentTesting: AssignmentTesting? = AssignmentTesting()
-assignmentTesting?.number ++= 3
+assignmentTesting!.number ++= 3
 
 print(assignmentTesting!.number)
 
