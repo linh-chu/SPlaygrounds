@@ -2,18 +2,105 @@
 
 import UIKit
 import Foundation
-import PlaygroundSupport
 
-URLCache.shared = URLCache(memoryCapacity: 0, diskCapacity: 0, diskPath: nil)
 
-let container = UIView(frame: CGRect(x: 0, y: 0, width: 500, height: 500))
-container.backgroundColor = .red
-//    let view = WKWebView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
+class Animal {
+    var id = 6 // Will be generated
+    let hasFourLegs = true
+    let numberOfEyes = 2
+    // ... //
 
-//    view.loadHTMLString(htmlString, baseURL: nil)
-//    container.addSubview(view)
-PlaygroundPage.current.liveView = container
-PlaygroundPage.current.needsIndefiniteExecution = true
+    init(id: Int) {
+        self.id = id
+    }
+    
+//    static var squirrel: Animal { return .init() }
+//    static var dolphin: Animal  { return .init() }
+//    static var puma: Animal { return .init() }
+//    static var deer: Animal { return .init() }
+}
+
+extension Animal: Equatable {
+    public static func ==(lhs: Animal, rhs: Animal) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+enum AnimalKind {
+    case squirrel
+    case dolphin
+    case puma
+    case deer
+}
+
+extension AnimalKind: RawRepresentable {
+    typealias RawValue = Animal
+    
+    init?(rawValue: RawValue) {
+        switch rawValue.id {
+        case 1: self = .squirrel
+        case 2: self = .dolphin
+        case 3: self = .puma
+        case 4: self = .deer
+        default: return nil
+        }
+    }
+    
+    var rawValue: RawValue {
+        switch self {
+        case .squirrel: return Animal(id: 1)
+        case .dolphin: return Animal(id: 2)
+        case .puma: return Animal(id: 3)
+        case .deer: return Animal(id: 4)
+        }
+    }
+    
+}
+
+class AnimalHelper {
+    func loadAnimal(_ animal: AnimalKind) {
+        
+        // Direct comparison works
+        if animal == .squirrel || animal == .deer {
+            loadGrass()
+        } else if animal == .dolphin {
+            return // not implemented
+        } else {
+            loadMeat()
+        }
+        
+        let b = Animal(id: 1)
+        if animal.rawValue == b {
+            print("y")
+        } else {
+            print("n")
+        }
+        
+        // Specifying the type explicitly also works
+//        switch animal {
+//        case Animal.squirrel, Animal.deer: loadGrass()
+//        case Animal.dolphin: return // not implemented
+//        default: loadMeat()
+//        }
+        
+        // Doesn't compile
+//        switch animal {
+//        case .squirrel, .deer: loadGrass()
+//        case .dolphin: return // not implemented
+//        default: loadMeat()
+//        }
+    }
+    
+    func loadGrass() {}
+    func loadMeat() {}
+}
+
+let animalHelper = AnimalHelper()
+animalHelper.loadAnimal(.squirrel)
+
+
+
+
 
 
 //public protocol PriorityQueuable: Hashable {
