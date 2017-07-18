@@ -157,6 +157,48 @@ view.loadHTMLString(htmlString, baseURL: nil)
 PlaygroundPage.current.liveView = view
 PlaygroundPage.current.needsIndefiniteExecution = true
 
+// Retroactive modeling
+extension Circle {
+    var diameter: Double {
+        get {
+            return radius * 2
+        }
+        set {
+            radius = newValue / 2
+        }
+    }
+    
+    // Example of getter-only computed properties
+    var area: Double {
+        return radius * radius * Double.pi
+    }
+    var perimeter: Double {
+        return 2 * radius * Double.pi
+    }
+}
+
+extension Rectangle {
+    var area: Double {
+        return size.width * size.height
+    }
+    var perimeter: Double {
+        return 2 * (size.width + size.height)
+    }
+}
+
+protocol ClosedShape {
+    var area: Double { get }
+    var perimeter: Double { get }
+}
+
+extension Circle: ClosedShape {}
+extension Rectangle: ClosedShape {}
+
+// Computes the total perimeter of an array of models (any mix of structs, enums, classes) that adopt the ClosedShape protocol
+func totalPerimeter(_ shapes: [ClosedShape]) -> Double {
+    return shapes.reduce(0, { $0 + $1.perimeter })
+}
+totalPerimeter([circle, rectangle])
 
 /********************************/
 /* UIGraphicsImageRenderer to render an image */
