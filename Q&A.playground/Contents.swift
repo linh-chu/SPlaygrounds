@@ -4,6 +4,38 @@ import UIKit
 import Foundation
 
 
+protocol A {
+    static var myVar: Int { get set }
+}
+
+protocol B {
+    static func test() -> Self
+}
+
+extension B where Self: A {
+    static func test() -> Self {
+        // Use of myVar
+        return self as! Self
+    }
+}
+
+protocol C {
+    
+}
+
+
+struct MyThing: A, B {
+    static var myVar = 1
+}
+
+struct MyThing1: B {
+    static func test() -> MyThing1 {
+        return self.init()
+    }
+}
+
+
+
 //class Animal {
 //    var id = 6 // Will be generated
 //    let hasFourLegs = true
