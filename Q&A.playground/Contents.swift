@@ -4,99 +4,131 @@ import UIKit
 import Foundation
 
 
-class Animal {
-    var id = 6 // Will be generated
-    let hasFourLegs = true
-    let numberOfEyes = 2
-    // ... //
-
-    init(id: Int) {
-        self.id = id
-    }
-    
-//    static var squirrel: Animal { return .init() }
-//    static var dolphin: Animal  { return .init() }
-//    static var puma: Animal { return .init() }
-//    static var deer: Animal { return .init() }
+protocol A {
+    static var myVar: Int { get set }
 }
 
-extension Animal: Equatable {
-    public static func ==(lhs: Animal, rhs: Animal) -> Bool {
-        return lhs.id == rhs.id
+protocol B {
+    static func test() -> Self
+}
+
+extension B where Self: A {
+    static func test() -> Self {
+        // Use of myVar
+        return self as! Self
     }
 }
 
-enum AnimalKind {
-    case squirrel
-    case dolphin
-    case puma
-    case deer
-}
-
-extension AnimalKind: RawRepresentable {
-    typealias RawValue = Animal
-    
-    init?(rawValue: RawValue) {
-        switch rawValue.id {
-        case 1: self = .squirrel
-        case 2: self = .dolphin
-        case 3: self = .puma
-        case 4: self = .deer
-        default: return nil
-        }
-    }
-    
-    var rawValue: RawValue {
-        switch self {
-        case .squirrel: return Animal(id: 1)
-        case .dolphin: return Animal(id: 2)
-        case .puma: return Animal(id: 3)
-        case .deer: return Animal(id: 4)
-        }
-    }
+protocol C {
     
 }
 
-class AnimalHelper {
-    func loadAnimal(_ animal: AnimalKind) {
-        
-        // Direct comparison works
-        if animal == .squirrel || animal == .deer {
-            loadGrass()
-        } else if animal == .dolphin {
-            return // not implemented
-        } else {
-            loadMeat()
-        }
-        
-        let b = Animal(id: 1)
-        if animal.rawValue == b {
-            print("y")
-        } else {
-            print("n")
-        }
-        
-        // Specifying the type explicitly also works
-//        switch animal {
-//        case Animal.squirrel, Animal.deer: loadGrass()
-//        case Animal.dolphin: return // not implemented
-//        default: loadMeat()
+
+struct MyThing: A, B {
+    static var myVar = 1
+}
+
+struct MyThing1: B {
+    static func test() -> MyThing1 {
+        return self.init()
+    }
+}
+
+
+
+//class Animal {
+//    var id = 6 // Will be generated
+//    let hasFourLegs = true
+//    let numberOfEyes = 2
+//    // ... //
+//
+//    init(id: Int) {
+//        self.id = id
+//    }
+//    
+////    static var squirrel: Animal { return .init() }
+////    static var dolphin: Animal  { return .init() }
+////    static var puma: Animal { return .init() }
+////    static var deer: Animal { return .init() }
+//}
+//
+//extension Animal: Equatable {
+//    public static func ==(lhs: Animal, rhs: Animal) -> Bool {
+//        return lhs.id == rhs.id
+//    }
+//}
+//
+//enum AnimalKind {
+//    case squirrel
+//    case dolphin
+//    case puma
+//    case deer
+//}
+//
+//extension AnimalKind: RawRepresentable {
+//    typealias RawValue = Animal
+//    
+//    init?(rawValue: RawValue) {
+//        switch rawValue.id {
+//        case 1: self = .squirrel
+//        case 2: self = .dolphin
+//        case 3: self = .puma
+//        case 4: self = .deer
+//        default: return nil
 //        }
-        
-        // Doesn't compile
-//        switch animal {
-//        case .squirrel, .deer: loadGrass()
-//        case .dolphin: return // not implemented
-//        default: loadMeat()
+//    }
+//    
+//    var rawValue: RawValue {
+//        switch self {
+//        case .squirrel: return Animal(id: 1)
+//        case .dolphin: return Animal(id: 2)
+//        case .puma: return Animal(id: 3)
+//        case .deer: return Animal(id: 4)
 //        }
-    }
-    
-    func loadGrass() {}
-    func loadMeat() {}
-}
-
-let animalHelper = AnimalHelper()
-animalHelper.loadAnimal(.squirrel)
+//    }
+//    
+//}
+//
+//class AnimalHelper {
+//    func loadAnimal(_ animal: AnimalKind) {
+//        
+//        // Direct comparison works
+//        if animal == .squirrel || animal == .deer {
+//            loadGrass()
+//        } else if animal == .dolphin {
+//            return // not implemented
+//        } else {
+//            loadMeat()
+//        }
+//        
+//        let b = Animal(id: 1)
+//        if animal.rawValue == b {
+//            print("y")
+//        } else {
+//            print("n")
+//        }
+//        
+//        // Specifying the type explicitly also works
+////        switch animal {
+////        case Animal.squirrel, Animal.deer: loadGrass()
+////        case Animal.dolphin: return // not implemented
+////        default: loadMeat()
+////        }
+//        
+//        // Doesn't compile
+////        switch animal {
+////        case .squirrel, .deer: loadGrass()
+////        case .dolphin: return // not implemented
+////        default: loadMeat()
+////        }
+//    }
+//    
+//    func loadGrass() {}
+//    func loadMeat() {}
+//}
+//
+//let animalHelper = AnimalHelper()
+//animalHelper.loadAnimal(.squirrel)
 
 
 
