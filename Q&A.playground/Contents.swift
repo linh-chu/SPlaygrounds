@@ -4,36 +4,25 @@ import UIKit
 import Foundation
 
 
-protocol A {
-    static var myVar: Int { get set }
-}
-
-protocol B {
-    static func test() -> Self
-}
-
-extension B where Self: A {
-    static func test() -> Self {
-        // Use of myVar
-        return self as! Self
-    }
-}
-
-protocol C {
-    
-}
-
-
-struct MyThing: A, B {
-    static var myVar = 1
-}
-
-struct MyThing1: B {
-    static func test() -> MyThing1 {
-        return self.init()
-    }
-}
-
+//struct Person: Codable {
+//    var name: String?
+//    var history: [Int: String]
+//    
+//    init() {
+//        self.name = "Name"
+//        history = [0: "Test"]
+//    }
+//}
+//
+//let person = Person()
+//
+//let encodedData = try? JSONEncoder().encode(person)
+//
+//let result = try JSONSerialization.jsonObject(with: encodedData, options: [])
+//
+//let dictionary = result as? [String: Any]
+//
+//print(dictionary)
 
 
 //class Animal {

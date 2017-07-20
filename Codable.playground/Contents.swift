@@ -1,5 +1,5 @@
 //: Codable - encoding and decoding object with nested dictionary
-  
+
 import UIKit
 
 struct Person: Codable {
@@ -29,7 +29,7 @@ do {
     let sampleDictionary: [String: Any] = ["history":[0: "Test"], "name": "Test"]
     print(sampleDictionary)
 } catch {
-    print(error.localizedDescription)    
+    print(error.localizedDescription)
 }
 
 extension KeyedDecodingContainer {
@@ -38,5 +38,6 @@ extension KeyedDecodingContainer {
             return try decodeIfPresent(T.self, forKey: key) ?? defaultValue
     }
 }
+
 
 
