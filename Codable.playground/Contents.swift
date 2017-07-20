@@ -39,5 +39,32 @@ extension KeyedDecodingContainer {
     }
 }
 
+/*********************************/
+
+struct Foo: Codable {
+    var a: Int
+    var b: Int
+    
+    init(a: Int, b: Int) {
+        self.a = a
+        self.b = b
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        a = try container.decodeIfPresent(Int.self, forKey: .a) ?? 0
+        b = try container.decodeIfPresent(Int.self, forKey: .a) ?? 0
+    }
+}
+
+let foo = Foo(a: 1, b: 2)
+//let dict = foo
+
+
+//let dict = try Decoder().container
+    //JSONDecoder().decode([String: Int].self, from: foo)
+//print(dict)
+
+
 
 

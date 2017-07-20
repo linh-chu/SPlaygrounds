@@ -4,27 +4,6 @@ import UIKit
 import Foundation
 
 
-//struct Person: Codable {
-//    var name: String?
-//    var history: [Int: String]
-//    
-//    init() {
-//        self.name = "Name"
-//        history = [0: "Test"]
-//    }
-//}
-//
-//let person = Person()
-//
-//let encodedData = try? JSONEncoder().encode(person)
-//
-//let result = try JSONSerialization.jsonObject(with: encodedData, options: [])
-//
-//let dictionary = result as? [String: Any]
-//
-//print(dictionary)
-
-
 //class Animal {
 //    var id = 6 // Will be generated
 //    let hasFourLegs = true
