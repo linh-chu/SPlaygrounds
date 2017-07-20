@@ -1,42 +1,59 @@
-//: Codable - encoding and decoding object with nested dictionary
-  
 import UIKit
 
-struct Person: Codable {
+class Character {
     var name: String
-    var history: [Int: String]
+    var owner: String
     
     init() {
-        self.name = "Name"
-        history = [0: "Test"]
+        name = "Frodo"
+        owner = "Ben"
     }
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.name = try container.decodeIfPresent(String.self, forKey: .name) ?? "Failed to decode name"
-        self.history = try container.decodeIfPresent([Int: String].self, forKey: .history) ?? [-1: "Failed to decode history"]
+    init(name: String, owner: String) {
+        self.name = name
+        self.owner = owner
+    }
+    
+    func random() -> Character {
+        return Character(name: "Gollum", owner: "Hans")
     }
 }
 
-let person = Person()
-do {
-    let jsonData = try JSONEncoder().encode(person)
-    
-    if let result = try? JSONDecoder().decode(Person.self, from: jsonData) {
-        print("\(result)\n")
-    }
-    
-    let sampleDictionary: [String: Any] = ["history":[0: "Test"], "name": "Test"]
-    print(sampleDictionary)
-} catch {
-    print(error.localizedDescription)    
+var characterArray: [Character] = []
+
+let testchar = Character()
+characterArray.append(testchar)
+let random = testchar.random()
+characterArray.append(random)
+
+for character in characterArray {
+    print(character.name)
 }
 
-extension KeyedDecodingContainer {
-    func decodeWrapper<T>(key: K, defaultValue: T) throws -> T
-        where T : Decodable {
-            return try decodeIfPresent(T.self, forKey: key) ?? defaultValue
-    }
-}
 
+//struct MyCharacter {
+//    var name: String
+//    var owner: String
+//
+//    init() {
+//        name = "Frodo"
+//        owner = "Ben"
+//    }
+//
+//    mutating func random() {
+//        name = "Gollum"
+//        owner = "Hans"
+//    }
+//}
+//
+//var myArray: [MyCharacter] = []
+//
+//var csVal = MyCharacter()
+//myArray.append(csVal)
+//csVal.random()
+//myArray.append(csVal)
+//
+//for character in myArray {
+//    print(character.name)
+//}
 
