@@ -4,6 +4,33 @@ import UIKit
 import Foundation
 
 
+infix operator ???: NilCoalescingPrecedence
+
+public func ???<T>(optional: T?, defaultValue: @autoclosure () -> String) -> String {
+    switch optional {
+    case let value?: return String(describing: value)
+    case nil: return defaultValue()
+    }
+}
+
+var someValue: Int? = 5
+print("The value is \(someValue ??? "unknown")")
+
+/***********/
+
+infix operator ?> : NilCoalescingPrecedence
+// @autoclosure will wrap the `rhs` closure into a closure -> `{ print("executing") }`
+func ?> (lhs: Any?, rhs: () -> Any) {
+    if lhs == nil {
+        print("lhs is nil")
+        rhs()
+    }
+}
+
+var some: Int? = nil
+some ?> { print("executed") }
+
+
 //class Animal {
 //    var id = 6 // Will be generated
 //    let hasFourLegs = true
