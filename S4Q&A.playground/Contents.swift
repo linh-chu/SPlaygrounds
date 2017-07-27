@@ -1,34 +1,39 @@
 import UIKit
 
-class Character {
-    var name: String
-    var owner: String
-    
-    init() {
-        name = "Frodo"
-        owner = "Ben"
-    }
-    
-    init(name: String, owner: String) {
-        self.name = name
-        self.owner = owner
-    }
-    
-    func random() -> Character {
-        return Character(name: "Gollum", owner: "Hans")
-    }
-}
+let array1: Set = Set(1...99).filter({$0 % 2 == 1})
+let array2: Array = Set(1...99).filter({$0 % 2 == 1})
+print(array1)
+print(array2)
 
-var characterArray: [Character] = []
-
-let testchar = Character()
-characterArray.append(testchar)
-let random = testchar.random()
-characterArray.append(random)
-
-for character in characterArray {
-    print(character.name)
-}
+//class Character {
+//    var name: String
+//    var owner: String
+//
+//    init() {
+//        name = "Frodo"
+//        owner = "Ben"
+//    }
+//
+//    init(name: String, owner: String) {
+//        self.name = name
+//        self.owner = owner
+//    }
+//
+//    func random() -> Character {
+//        return Character(name: "Gollum", owner: "Hans")
+//    }
+//}
+//
+//var characterArray: [Character] = []
+//
+//let testchar = Character()
+//characterArray.append(testchar)
+//let random = testchar.random()
+//characterArray.append(random)
+//
+//for character in characterArray {
+//    print(character.name)
+//}
 
 
 //struct MyCharacter {

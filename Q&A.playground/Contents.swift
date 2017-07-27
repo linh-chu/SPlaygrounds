@@ -4,9 +4,9 @@ import UIKit
 import Foundation
 
 
-let arrayAP = Array(1...99).filter({$0 % 2 == 1})
-print(arrayAP)
 
+let arrayAP: Array = Set(1...99).filter({$0 % 2 == 1})
+print(arrayAP)
 
 
 //print(words["English"]?[0])
