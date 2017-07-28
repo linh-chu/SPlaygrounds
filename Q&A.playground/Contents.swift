@@ -5,37 +5,27 @@ import Foundation
 import PlaygroundSupport
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-//class A {
-//    var list = [1, 2, 3]
-//    func edit(_ list: inout [Int]) {
-//        list.append(4)
-//        DispatchQueue.main.async() {
-//            self.list.append(5)
-//        }
-//    }
-//}
-//
-//let a = A()
-//a.edit(&a.list)
-//print(a.list)
 
+
+
+//  Limiting inout capture to @noescape contexts
 class MyClass {
-    var list = [1, 2, 3]
-    func edit(_ completion: @escaping (_ list: [Int]) -> ()) {
+    static func edit(_ list: [Int], _ completion: @escaping ([Int]) -> ()) {
+        var list = list
         list.append(4)
         DispatchQueue.main.async() {
-            self.list.append(5)
-            completion(self.list)
+            list.append(5)
+            completion(list)
         }
     }
 }
 
-let myClass = MyClass()
-myClass.edit { (list) in
-    NSLog("\(list)")
+var myList = [1, 2, 3]
+MyClass.edit(myList) { (list) in
+    myList = list
+    print("My list after editing: \(myList)")
 }
-
-
+print("My list without editing: \(myList)")
 
 
 //print(words["English"]?[0])
