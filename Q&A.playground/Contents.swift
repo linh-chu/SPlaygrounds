@@ -2,11 +2,40 @@
 
 import UIKit
 import Foundation
+import PlaygroundSupport
+PlaygroundPage.current.needsIndefiniteExecution = true
+
+//class A {
+//    var list = [1, 2, 3]
+//    func edit(_ list: inout [Int]) {
+//        list.append(4)
+//        DispatchQueue.main.async() {
+//            self.list.append(5)
+//        }
+//    }
+//}
+//
+//let a = A()
+//a.edit(&a.list)
+//print(a.list)
+
+class MyClass {
+    var list = [1, 2, 3]
+    func edit(_ completion: @escaping (_ list: [Int]) -> ()) {
+        list.append(4)
+        DispatchQueue.main.async() {
+            self.list.append(5)
+            completion(self.list)
+        }
+    }
+}
+
+let myClass = MyClass()
+myClass.edit { (list) in
+    NSLog("\(list)")
+}
 
 
-
-let arrayAP: Array = Set(1...99).filter({$0 % 2 == 1})
-print(arrayAP)
 
 
 //print(words["English"]?[0])
