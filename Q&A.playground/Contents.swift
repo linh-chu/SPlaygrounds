@@ -6,8 +6,6 @@ import PlaygroundSupport
 PlaygroundPage.current.needsIndefiniteExecution = true
 
 
-
-
 //  Limiting inout capture to @noescape contexts
 class MyClass {
     static func edit(_ list: [Int], _ completion: @escaping ([Int]) -> ()) {
@@ -25,6 +23,7 @@ MyClass.edit(myList) { (list) in
     myList = list
     print("My list after editing: \(myList)")
 }
+
 print("My list without editing: \(myList)")
 
 
