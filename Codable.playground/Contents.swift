@@ -20,10 +20,13 @@ struct Order: Codable {
     var createdAt:Int64 = 0
     var updatedAt:Int64 = 0
     
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        self.items = try container.decodeIfPresent([OrderItem].self, forKey: .items) ?? []
-//    }
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.items = try container.decodeIfPresent([OrderItem].self, forKey: .items) ?? []
+    }
+    
+    func encode(to encoder: Encoder) throws {
+    }
 }
 
 /*********************************/
