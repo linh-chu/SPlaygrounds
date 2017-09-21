@@ -23,7 +23,6 @@ MyClass.edit(myList) { (list) in
     myList = list
     print("My list after editing: \(myList)")
 }
-
 print("My list without editing: \(myList)")
 
 
@@ -38,7 +37,7 @@ print("My list without editing: \(myList)")
 //    case nil: return defaultValue()
 //    }
 //}
-//
+
 //var someValue: Int? = 5
 //print("The value is \(someValue ??? "unknown")")
 //
