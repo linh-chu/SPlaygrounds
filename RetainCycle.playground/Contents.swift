@@ -48,3 +48,42 @@ class RetainCycle {
 
 /**********************************/
 
+/// Capture semantics when assigning a function to a block in Swift?
+
+class Button {
+    var wasTapped: () -> Void
+    
+    init() {
+        wasTapped = {}
+    }
+}
+
+class ViewController {
+    let button: Button
+    
+    func setUpButtonHandler() {
+        //button.wasTapped = { [weak self] in self?.buttonWasTapped() } // no retain cycle
+        //button.wasTapped = { self.buttonWasTapped() } // retain cycle
+        //button.wasTapped = buttonWasTapped // retain cycle
+    }
+    
+    func buttonWasTapped() {
+        print("tapped!")
+    }
+    
+    init() {
+        button = Button()
+        setUpButtonHandler()
+    }
+    
+    deinit {
+        print("deinit")
+    }
+}
+
+func test() {
+    let vc = ViewController()
+    vc.button.wasTapped()
+}
+
+test()
