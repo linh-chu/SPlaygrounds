@@ -1,6 +1,8 @@
 import UIKit
 
-// Composing Classes and Protocols
+/**
+ * Composing Classes and Protocols
+ */
 
 protocol Shakeable {
     func shake()
@@ -13,14 +15,20 @@ func shakeEm(controls: [UIColor & Shakeable]) {
     }
 }
 
-// String as a collection of characters
+/**
+ * String as a collection of characters
+ */
 
 let values = "one,two,three..."
 
 var i = values.startIndex
-while let comma = values[i..<values.endIndex].index(of: ",") {
+// i... = i..<values.endIndex: from the index to the end of the collection
+while let comma = values[i...].index(of: ",") {
     if values[i..<comma] == "two" {
         print("Found it!")
     }
     i = values.index(after: comma)
 }
+
+let emoji = "😄"
+emoji.count
