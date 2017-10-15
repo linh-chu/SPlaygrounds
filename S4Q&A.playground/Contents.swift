@@ -12,3 +12,15 @@ func shakeEm(controls: [UIColor & Shakeable]) {
         control.shake()
     }
 }
+
+// String as a collection of characters
+
+let values = "one,two,three..."
+
+var i = values.startIndex
+while let comma = values[i..<values.endIndex].index(of: ",") {
+    if values[i..<comma] == "two" {
+        print("Found it!")
+    }
+    i = values.index(after: comma)
+}
