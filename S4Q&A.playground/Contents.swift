@@ -30,5 +30,6 @@ while let comma = values[i...].index(of: ",") {
     i = values.index(after: comma)
 }
 
-let emoji = "😄"
-emoji.count
+//let emoji = "😄"
+//emoji.count
+
