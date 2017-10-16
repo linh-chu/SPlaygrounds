@@ -30,6 +30,12 @@ while let comma = values[i...].index(of: ",") {
     i = values.index(after: comma)
 }
 
-//let emoji = "😄"
-//emoji.count
+/**
+ * Sorting
+ */
+let animals = ["fish", "cat", "chicken", "dog"]
+let sorted = animals.sorted()
+print(sorted)
+let string: String? = Optional.none
+
 
