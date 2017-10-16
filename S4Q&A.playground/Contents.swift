@@ -67,3 +67,9 @@ func ^^(lhs: Int, rhs: Int) -> Int {
 }
 let a = 10^^3
 
+/**
+ * Recursive enumeration cases
+ */
+enum List<T> {
+    indirect case Cons(T, List<T>)
+}
