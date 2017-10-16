@@ -38,4 +38,19 @@ let sorted = animals.sorted()
 print(sorted)
 let string: String? = Optional.none
 
+/**
+ * ExpressibleByFloatLiteral Convertibles
+ */
+public struct Thermometer {
+    public var temperature: Double
+    public init(temperature: Double) {
+        self.temperature = temperature
+    }
+}
 
+extension Thermometer: ExpressibleByFloatLiteral {
+    public init(floatLiteral value: FloatLiteralType) {
+        self.init(temperature: value)
+    }
+}
+var thermometer: Thermometer = 56.8
