@@ -55,5 +55,15 @@ extension Thermometer: ExpressibleByFloatLiteral {
 }
 var thermometer: Thermometer = 56.8
 
-
+/**
+ * Define and implement a custom ^^ power operator
+ */
+infix operator ^^: MultiplicationPrecedence
+func ^^(lhs: Int, rhs: Int) -> Int {
+    let l = Double(lhs)
+    let r = Double(rhs)
+    let p = pow(l, r)
+    return Int(p)
+}
+let a = 10^^3
 
