@@ -2,48 +2,27 @@
 
 import UIKit
 
-//class Dog {
-//    let company = "Cat"
-//    lazy var toy: String = {
-//        print(#function)
-//        return "Mr Love " + self.company
-//    }()
+//class RetainCycle {
+//    var closure: (() -> Void)!
+//    var string = "Hello"
+//
+//    init() {
+////        closure = { [unowned self] in
+//        closure = {
+//            print(#function)
+//            self.string = "Hello, World!"
+//        }
+//    }
+//
 //    deinit {
-//        print(#function)
+//        print("D " + #function)
 //    }
 //}
 //
-//
-//print("Dog")
-//var dog: Dog? = Dog()
-//print("Dog")
-//dog = Dog()
-//dog?.toy
-//dog = nil
-//print("Exit")
-
-
-class RetainCycle {
-    var closure: (() -> Void)!
-    var string = "Hello"
-    
-    init() {
-//        closure = { [unowned self] in
-        closure = {
-            print(#function)
-            self.string = "Hello, World!"
-        }
-    }
-    
-    deinit {
-        print("D " + #function)
-    }
-}
-
-//Initialize the class and activate the retain cycle.
-var retainCycleInstance: RetainCycle? = RetainCycle()
-retainCycleInstance?.closure() //At this point we can guarantee the captured self inside the closure will not be nil. Any further code after this (especially code that alters self's reference) needs to be judged on whether or not unowned still works here.
-retainCycleInstance = nil
+////Initialize the class and activate the retain cycle.
+//var retainCycleInstance: RetainCycle? = RetainCycle()
+//retainCycleInstance?.closure() //At this point we can guarantee the captured self inside the closure will not be nil. Any further code after this (especially code that alters self's reference) needs to be judged on whether or not unowned still works here.
+//retainCycleInstance = nil
 
 
 /**********************************/
@@ -87,4 +66,47 @@ retainCycleInstance = nil
 //}
 //
 //test()
+
+/**********************************/
+
+/// Protocol Retain Cycle
+
+protocol NetworkServiceProtocol {
+    func doSomething()
+}
+
+class FilterManager {
+    let networkService: NetworkServiceProtocol
+    
+    init(_ networkService: NetworkServiceProtocol) {
+        self.networkService = networkService
+    }
+    
+    deinit {
+        print("FilterManager " + #function)
+    }
+}
+
+class MockObjectNetworkService: NetworkServiceProtocol {
+    var filterManager: FilterManager?
+    
+    func doSomething() {
+        print("do something")
+    }
+    
+    deinit {
+        print("MockObjectNetworkService " + #function)
+    }
+}
+
+var networkService: MockObjectNetworkService? = MockObjectNetworkService()
+var filterManager: FilterManager? = FilterManager(networkService!)
+
+networkService?.filterManager = filterManager
+filterManager?.networkService.doSomething()
+filterManager = nil
+networkService = nil
+
+
+
 
